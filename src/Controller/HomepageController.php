@@ -9,14 +9,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+use App\Entity\Optreden;
+
+use App\Repository\OptredenRepository;
+
 #[Route('/')]
 class HomepageController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    #[Template()]
     public function index()
     {
-        return ['controller_name' => 'HomepageController'];
+        /** @var OptredenRepository $rep */
+        $rep = $this->getDoctrine()->getRepository(Optreden::class);
+        $data = $rep->getAllOptredens();
+
+        dump($data);
+        die();
     }
 
      

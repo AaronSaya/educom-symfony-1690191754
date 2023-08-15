@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PoppodiumRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PoppodiumRepository::class)]
@@ -39,6 +41,14 @@ class Poppodium
 
     #[ORM\Column(length: 100)]
     private ?string $afbeelding_url = null;
+
+    #[ORM\OneToMany(mappedBy: 'poppodium', targetEntity: Optreden::class, orphanRemoval: true)]
+    private Collection $optredens;
+
+    public function __construct()
+    {
+        $this->optredens = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -152,4 +162,36 @@ class Poppodium
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Optreden>
+     */
+    public function getOptredens(): Collection
+    {
+        return $this->optredens;
+    }
+
+    public function addOptreden(Optreden $optreden): static
+    {
+        if (!$this->optredens->contains($optreden)) {
+            $this->optredens->add($optreden);
+            $optreden->setPoppodium($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOptreden(Optreden $optreden): static
+    {
+        if ($this->optredens->removeElement($optreden)) {
+            // set the owning side to null (unless already changed)
+            if ($optreden->getPoppodium() === $this) {
+                $optreden->setPoppodium(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 }
