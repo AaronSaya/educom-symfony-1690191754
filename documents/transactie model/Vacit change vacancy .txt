@@ -1,0 +1,36 @@
+title VACIT Vacancy Employer
+
+actor Employer
+participant Front End
+participant Back End
+database Database
+
+==Transaction: Change Vacancies==
+Employer->Front End: Log in
+Front End->Back End: Verify log in
+alt Login True
+Back End->Database: Fetch data
+Database->Back End: Send data
+Back End->Front End: Send Data
+Front End->Employer: Show profile page
+else Login False
+Back End->Front End: Login Failed
+Front End->Employer: Login failed message
+end
+==Transaction: Update/Save==
+Employer->Front End: Type input in inputfields
+Employer->Front End: Click save button
+Front End->Back End: Send data
+Back End->Database: Update/save data
+Database->Back End: Send new data
+Back End->Front End: Send new data
+Front End->Employer: Show new data
+
+==Transactions: Delete==
+Employer->Front End: Click delete button
+Front End->Back End: Send data
+Back End->Database: delete data
+Database->Back End: Send new data
+Back End->Front End: Send new data
+Front End->Employer: Show new data
+

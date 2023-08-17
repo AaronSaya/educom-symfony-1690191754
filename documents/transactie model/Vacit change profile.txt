@@ -1,0 +1,38 @@
+title VACIT Change Profile Candidate
+
+actor Candidate
+participant Front End
+participant Back End
+database Database
+
+==Transaction: Profilepage==
+Candidate->Front End: Log in (email/password)
+Front End->Back End: Fetch data (profile_id)
+Back End->Front End: Send data
+Front End->Candidate: Show Profilepage
+
+==Transaction: Change profile data== 
+Candidate->Front End: Type in inputfields
+Candidate->Front End: Click save button
+Front End->Back End: Send data
+Back End->Database: Update/save/delete data
+Database->Back End: Send new data
+Back End->Front End: Send new data
+Front End->Candidate: Show new data
+
+==Transaction: Upload CV== 
+Candidate->Front End: Click Button Upload CV
+Candidate->Front End: Select File
+Front End->Back End: Send data
+Back End->Database:Update/save data
+Database->Back End: Sned new data
+Back End->Front End: Send new data
+Front End->Candidate: Show new data
+
+==Transaction: Delete CV== 
+Candidate->Front End: Click Button delete CV
+Front End->Back End: Send data
+Back End->Database: Delete data
+Database->Back End: Sned new data
+Back End->Front End: Send new data
+Front End->Candidate: Show new data

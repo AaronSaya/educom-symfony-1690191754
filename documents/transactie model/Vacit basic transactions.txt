@@ -1,0 +1,37 @@
+title VACIT Basic Transactions
+
+actor User
+participant Front End
+participant Back End
+
+
+==Transaction: Homepage==
+User->Front End:Type URL
+Front End->Back End: Fetch data
+Back End->Front End: Send data
+Front End->User: Show Homepage
+
+==Transaction: Detailpage==
+User->Front End: Click link (vacancy)
+Front End->Back End: Fetch data (vacancy_id)
+Back End->Front End: Send data
+Front End->User: Show Detailpage
+
+
+==Transaction: Login page==
+User->Front End: Click on Login
+Front End->Back End: Fetch data 
+Back End->Front End: Send data
+Front End->User: Show Login page
+
+==Transaction: Profilepage==
+User->Front End: Log in (email/password)
+Front End->Back End: Fetch data (profile_id)
+Back End->Front End: Send data
+Front End->User: Show Profilepage
+
+==Transaction: Activities page==
+User->Front End: Click link (while logged in)
+Front End->Back End: Fetch data 
+Back End->Front End: Send data
+Front End->User: Show Activities page

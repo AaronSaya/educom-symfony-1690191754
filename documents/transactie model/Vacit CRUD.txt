@@ -1,0 +1,17 @@
+title VACIT CRUD
+
+actor User
+participant Controller
+participant Repository
+participant Entity
+database Database
+
+==Transactie: Homepage==
+User->Controller:Transaction
+Controller->Repository: Send data to repository
+Repository->Entity: CRUD actions
+Entity->Database: Query
+Database->Entity: Result
+Entity->Repository: Result
+Repository->Controller: Result
+Controller->User: Result
