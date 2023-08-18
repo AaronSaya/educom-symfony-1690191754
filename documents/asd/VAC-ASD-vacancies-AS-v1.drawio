@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="8Wz3FwkcaFIM8SSFOOUf" name="Page-1">
-        <mxGraphModel dx="1563" dy="571" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="1852" dy="571" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -10,7 +10,7 @@
                 <mxCell id="11" value="Controller" style="swimlane;startSize=20;html=1;labelBackgroundColor=none;fillColor=#60a917;fontColor=#ffffff;strokeColor=#000000;" parent="10" vertex="1">
                     <mxGeometry y="20" width="290" height="1270" as="geometry"/>
                 </mxCell>
-                <mxCell id="43" value="&amp;nbsp; fetch vacancies" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E6E6E6;align=center;fontColor=#000000;" parent="11" vertex="1">
+                <mxCell id="43" value="&amp;nbsp; show vacancies" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E6E6E6;align=center;fontColor=#000000;" parent="11" vertex="1">
                     <mxGeometry x="60" y="490" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="Service" style="swimlane;startSize=20;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#000000;" parent="10" vertex="1">
