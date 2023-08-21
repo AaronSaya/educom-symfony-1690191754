@@ -1,0 +1,52 @@
+title VACIT Sign Up
+
+actor User
+participant Controller
+participant Service
+participant Repository
+participant Entity
+
+==Transactie: Sign Up==
+User->Controller: Click sign up button 
+Controller->User: Fetch form
+User->Controller: Enter username
+Controller->Service: Check username availability
+alt Username is available
+Service->Repository: Check username availability
+Repository->Entity: Check username availability
+Entity->Repository: Check username availability
+Repository->Service: Username is available
+Service->User: Username is available
+else Username is not available
+Service->User: Username is not available
+end
+
+User->Controller: Enter password
+Controller->Service: Validate password requirements
+opt Password requirements met
+Service->User: Password requirements met
+else Password requirements not met
+Service->User: Password requirements not met
+end
+
+User->Controller: Enter password confirmation
+Controller->Service: Check password confirmation
+opt Password confirmation matches
+Service->User: Password confirmation matches
+else Password confirmation does not match
+Service->User: Password confirmation does not match
+end
+
+User->Controller: Confirm signup
+alt Signup successful
+Controller->Service: Generate default password
+Service->Repository: Save user data
+Repository->Entity: Save user data
+Entity->Repository: Save user data
+Repository->Service: Signup successful
+Service->User: Success message, redirect to success page
+else Signup failed
+Controller->Service: Signup failed
+Service->Repository: Signup failed
+Repository->User: Error message, signup failed
+end

@@ -1,0 +1,39 @@
+title VACIT CRUD
+
+actor Employer
+participant Controller
+participant Service
+participant Repository
+participant Entity
+
+
+title VACIT Select Candidate
+
+==Transaction: Change Vacancies==
+Employer->Controller: Log in
+Controller->Service:send data
+Service->Repository: verify data
+alt Login True
+Repository->Entity: Fetch data
+Entity->Repository: Send data
+Repository->Service: Send Data
+Service->Controller: Send data
+Controller->Employer: Show profile
+->Employer: Show profile page
+else Login False
+Repository->Entity: Login Failed
+Entity->Repository: Send data
+Repository->Service: Send Data
+Service->Controller: Send data
+Controller->Employer: Show message login failed
+end
+
+==Transaction: Select Candidate==
+Employer->Controller: Click on checkbox 
+Controller->Service: Send data
+Service->Repository: Send data
+Repository->Entity: Update data 
+Entity->Repository: Send new data
+Repository->Service: Send new data
+Service->Controller: Send data
+Controller->Employer: Show update checkbox

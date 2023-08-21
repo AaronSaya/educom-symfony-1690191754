@@ -1,0 +1,41 @@
+title VACIT Change Vacancies Employer
+
+actor Employer
+participant Controller
+participant Service
+participant Repository
+participant Entity
+
+==Transaction: Log In==
+Employer->Controller: Log in
+Controller->Service:send data
+alt Login True
+Service->Repository: Verify log in
+Repository->Entity: fetch data
+Entity->Repository: Login succes
+Repository->Employer: Show profile page
+else Login False
+Entity->Repository: Login Failed
+Repository->Employer: Login failed message
+end
+==Transaction: Update/Save==
+Employer->Controller: Type input in inputfields
+Employer->Controller: Click save button
+Controller->Service: send data
+Service->Repository: send data
+Repository->Entity: Update/save data
+Entity->Repository: send new data
+Repository->Service: send data
+Service->Controller: send data
+Controller->Employer: Show new data
+
+==Transactions: Delete==
+Employer->Controller: Click delete button
+Controller->Service: send data
+Service->Repository: send data
+Repository->Entity: delete data
+Entity->Repository: send new data
+Repository->Service: send data
+Service->Controller: send data
+Controller->Employer: Show new data
+

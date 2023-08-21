@@ -1,0 +1,58 @@
+title VACIT Basic Transactions
+
+actor User
+participant Controller
+participant Service
+participant Repository
+participant Entity
+
+
+==Transaction: Homepage==
+User->Controller:Type URL
+Controller->Service: Send data
+Service->Repository: Send data
+Repository->Entity: Fetch data
+Entity->Repository: Send data
+Repository->Service: Send data
+Service->Controller: Send data
+Controller->User: Show Homepage
+
+==Transaction: Detailpage==
+User->Controller:Type URL
+Controller->Service: Send data
+Service->Repository: Send data
+Repository->Entity: Fetch data
+Entity->Repository: Send data
+Repository->Service: Send data
+Service->Controller: Send data
+Controller->User: Detailpage
+
+==Transaction: Login page==
+User->Controller: Click on Login
+Controller->Service: Send data
+Service->Repository: Verify data
+Repository->Entity: Fetch data
+Entity->Repository: Send data
+Repository->Service: Send data
+Service->Controller: Send data
+Controller->User: Show Detailpage
+
+==Transaction: Profilepage==
+User->Controller: Log in (email/password)
+Controller->Service: Send data
+Service->Repository: Verify data  (id)
+Repository->Entity: Fetch data
+Entity->Repository: Send data
+Repository->Service: Send data
+Service->Controller: Send data
+Controller->User: Show Profilepage
+
+==Transaction: Activities page==
+User->Controller: Click link (while logged in)
+Controller->Service: Send data
+Service->Repository: Send data
+Repository->Entity: Fetch data
+Entity->Repository: Send data
+Repository->Service: Send data
+Service->Controller: Send data
+Controller->User: Show Activitiespage

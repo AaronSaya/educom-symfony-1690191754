@@ -1,0 +1,49 @@
+title VACIT Change Profile Candidate
+
+actor Candidate
+participant Controller
+participant Service
+participant Repository
+participant Entity
+
+==Transaction: Profilepage==
+Candidate->Controller: Log in (email/password)
+Controller->Service: Send data
+Service->Repository: Verify data  (id)
+Repository->Entity: Fetch data
+Entity->Repository: Send data
+Repository->Service: Send data
+Service->Controller: Send data
+Controller->Candidate: Show Profilepage
+
+==Transaction: Change profile data== 
+Candidate->Controller: Type in inputfields
+Candidate->Controller: Click save button
+Controller->Service: Send data
+Service->Repository: Send data
+Repository->Entity: Update/save/delete data
+Entity->Repository: Send new data
+Repository->Service: Send new data
+Service->Controller: Send new data
+Controller->Candidate: Show new data
+
+==Transaction: Upload CV== 
+Candidate->Controller: Click Button Upload CV
+Candidate->Controller: Select File
+Controller->Service: Send data
+Service->Repository: Send data
+Repository->Entity: Update/save data
+Entity->Repository: Send new data
+Repository->Candidate: Message upload successfull
+
+
+==Transaction: Delete CV== 
+Candidate->Controller: Click Button Delete CV
+Candidate->Controller: Select File
+Controller->Service: Send data
+Service->Repository: Send data
+Repository->Entity: Delete data
+Entity->Repository: Send  data
+
+Repository->Candidate: Message delete successfull
+
