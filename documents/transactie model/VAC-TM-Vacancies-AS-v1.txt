@@ -1,0 +1,28 @@
+title Adding Vacancies 
+
+User -> Controller: Add Vacancy
+Controller -> Service: Request to add vacancy
+Service -> Repository: Create vacancy
+Repository -> Entity: Create vacancy
+Entity -> Repository: Confirmation
+Repository -> Service: Return success
+Service -> Controller: Return success
+Controller -> User: Display success or error
+
+User -> Controller: View Vacancy Details
+Controller -> Service: Retrieve Vacancy Details
+Service -> Repository: Access Vacancy data
+Repository -> Entity: Retrieve Vacancy details
+Entity -> Repository: Confirmation
+Repository -> Service: Return Vacancy details
+Service -> Controller: Return Vacancy details
+Controller -> User: Display Vacancy details
+
+User -> Controller: View Activities for Vacancy
+Controller -> Service: Retrieve Activities for Vacancy
+Service -> Repository: Access Activity data
+Repository -> Entity: Retrieve Activities for Vacancy
+Entity -> Repository: Confirmation
+Repository -> Service: Return Activities for Vacancy
+Service -> Controller: Return Activities for Vacancy
+Controller -> User: Display Activities for Vacancy

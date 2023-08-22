@@ -1,0 +1,10 @@
+title PDF Upload 
+
+User -> Controller: Requests to upload PDF
+Controller -> Service: Calls uploadPDF(file)
+Service -> Repository: StorePDF(file)
+Repository -> Entity: Save PDF in storage
+Entity -> Repository: Confirmation of saving
+Repository -> Service: Return success status
+Service -> Controller: Return success status
+Controller -> User: Confirmation message or error

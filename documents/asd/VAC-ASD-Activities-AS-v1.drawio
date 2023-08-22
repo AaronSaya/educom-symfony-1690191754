@@ -4,7 +4,7 @@
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="Update Activities" style="shape=table;childLayout=tableLayout;startSize=40;collapsible=0;recursiveResize=0;expand=0;fillColor=#b1ddf0;strokeColor=#000000;fontColor=#000000;" parent="1" vertex="1">
+                <mxCell id="2" value="Delete Activities" style="shape=table;childLayout=tableLayout;startSize=40;collapsible=0;recursiveResize=0;expand=0;fillColor=#b1ddf0;strokeColor=#000000;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="-90" y="20" width="1150" height="616" as="geometry"/>
                 </mxCell>
                 <mxCell id="3" value="" style="shape=tableRow;horizontal=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;dropTarget=0;fontStyle=0;fillColor=#b0e3e6;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;startSize=40;collapsible=0;recursiveResize=0;expand=0;strokeColor=#0e8088;fontColor=#000000;" parent="2" vertex="1">
@@ -25,7 +25,7 @@
                         <mxRectangle width="274" height="144" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="7" value="Fetch Profile" style="whiteSpace=wrap;html=1;fillColor=#999999;fontColor=#000000;" parent="6" vertex="1">
+                <mxCell id="7" value="Fetch User" style="whiteSpace=wrap;html=1;fillColor=#999999;fontColor=#000000;" parent="6" vertex="1">
                     <mxGeometry x="97" y="70" width="80" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" value="Entity" style="swimlane;swimlaneHead=0;swimlaneBody=0;fontStyle=0;connectable=0;fillColor=#b0e3e6;startSize=30;collapsible=0;recursiveResize=0;expand=0;strokeColor=#000000;fontColor=#000000;swimlaneFillColor=#E6E6E6;" parent="3" vertex="1">
@@ -33,7 +33,7 @@
                         <mxRectangle width="276" height="144" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="22" value="Profile" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#99FFCC;strokeColor=#000000;fontColor=#000000;" parent="8" vertex="1">
+                <mxCell id="22" value="User" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#99FFCC;strokeColor=#000000;fontColor=#000000;" parent="8" vertex="1">
                     <mxGeometry x="58" y="45" width="160" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="10" style="edgeStyle=none;html=1;strokeColor=#000000;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="3" source="22" target="7" edge="1">
@@ -57,7 +57,7 @@
                         <mxRectangle width="274" height="144" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="49" value="Fetch Vacancy" style="whiteSpace=wrap;html=1;fillColor=#999999;fontColor=#000000;" parent="20" vertex="1">
+                <mxCell id="49" value="&lt;span style=&quot;&quot;&gt;Fetch&amp;nbsp;&lt;/span&gt;Vacancy" style="whiteSpace=wrap;html=1;fillColor=#999999;fontColor=#000000;" parent="20" vertex="1">
                     <mxGeometry x="120" y="52" width="80" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="21" value="" style="swimlane;swimlaneHead=0;swimlaneBody=0;fontStyle=0;connectable=0;fillColor=none;startSize=0;collapsible=0;recursiveResize=0;expand=0;swimlaneFillColor=#E6E6E6;strokeColor=#000000;" parent="17" vertex="1">
@@ -79,7 +79,7 @@
                         <mxRectangle width="279" height="144" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="25" value="Delete&amp;nbsp;&lt;span style=&quot;&quot;&gt;Activities&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#999999;fillStyle=auto;fontColor=#000000;" parent="24" vertex="1">
+                <mxCell id="25" value="&lt;span style=&quot;&quot;&gt;Delete&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;&quot;&gt;Activities&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#999999;fillStyle=auto;fontColor=#000000;" parent="24" vertex="1">
                     <mxGeometry x="90" y="51" width="110" height="42" as="geometry"/>
                 </mxCell>
                 <mxCell id="26" value="" style="swimlane;swimlaneHead=0;swimlaneBody=0;fontStyle=0;connectable=0;fillColor=none;startSize=0;collapsible=0;recursiveResize=0;expand=0;swimlaneFillColor=#E6E6E6;strokeColor=#000000;" parent="23" vertex="1">
@@ -87,7 +87,7 @@
                         <mxRectangle width="281" height="144" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="27" value="Delete&amp;nbsp;&lt;span style=&quot;&quot;&gt;Activities&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#999999;fontColor=#000000;" parent="26" vertex="1">
+                <mxCell id="27" value="&lt;span style=&quot;&quot;&gt;Delete&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;&quot;&gt;Activities&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#999999;fontColor=#000000;" parent="26" vertex="1">
                     <mxGeometry x="97" y="52" width="109" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" value="" style="swimlane;swimlaneHead=0;swimlaneBody=0;fontStyle=0;connectable=0;fillColor=none;startSize=0;collapsible=0;recursiveResize=0;expand=0;swimlaneFillColor=#E6E6E6;strokeColor=#000000;" parent="23" vertex="1">
@@ -95,7 +95,7 @@
                         <mxRectangle width="274" height="144" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="29" value="Delete&amp;nbsp;&lt;span style=&quot;&quot;&gt;Activities&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#999999;fontColor=#000000;align=center;" parent="28" vertex="1">
+                <mxCell id="29" value="&lt;span style=&quot;&quot;&gt;Add&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;&quot;&gt;Activities&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#999999;fontColor=#000000;align=center;" parent="28" vertex="1">
                     <mxGeometry x="102.5" y="52" width="115" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="30" value="" style="swimlane;swimlaneHead=0;swimlaneBody=0;fontStyle=0;connectable=0;fillColor=none;startSize=0;collapsible=0;recursiveResize=0;expand=0;swimlaneFillColor=#E6E6E6;" parent="23" vertex="1">
@@ -104,7 +104,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="40" value="Activities" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#99FFCC;strokeColor=#000000;fontColor=#000000;" parent="30" vertex="1">
-                    <mxGeometry x="66" y="27" width="160" height="90" as="geometry"/>
+                    <mxGeometry x="58" y="27" width="160" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="32" style="edgeStyle=none;html=1;strokeColor=#000000;" parent="23" source="27" target="29" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -112,8 +112,22 @@
                 <mxCell id="33" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="23" source="25" target="27" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="56" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="23" source="29" target="40" edge="1">
+                <mxCell id="59" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" edge="1" parent="23" source="29" target="40">
                     <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" parent="2" source="49" target="27" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="471" y="256"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="58" style="edgeStyle=none;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" parent="2" source="7" target="27" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="443" y="130"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="35" value="" style="shape=tableRow;horizontal=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;dropTarget=0;fontStyle=0;fillColor=#b0e3e6;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;startSize=40;collapsible=0;recursiveResize=0;expand=0;strokeColor=#0e8088;" parent="2" vertex="1">
                     <mxGeometry y="472" width="1150" height="144" as="geometry"/>
@@ -138,21 +152,7 @@
                         <mxRectangle width="276" height="144" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="57" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" parent="2" source="49" target="27" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="471" y="256"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="58" style="edgeStyle=none;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" parent="2" source="7" target="27" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="443" y="130"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="44" value="&lt;font color=&quot;#000000&quot;&gt;Profile&lt;/font&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-90;" parent="1" vertex="1">
+                <mxCell id="44" value="&lt;font color=&quot;#000000&quot;&gt;User&lt;/font&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-90;" parent="1" vertex="1">
                     <mxGeometry x="-110" y="130" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="45" value="&lt;font color=&quot;#000000&quot;&gt;Vacancies&lt;/font&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-90;" parent="1" vertex="1">
