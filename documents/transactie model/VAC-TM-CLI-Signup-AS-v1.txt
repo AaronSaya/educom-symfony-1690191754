@@ -1,0 +1,22 @@
+title Employer Signup via CLI
+
+[*] --> User
+
+User --> Controller: Run Signup Command
+Controller --> Service: Process Signup
+Service --> Repository: Create Employer
+Repository --> Entity: Create Employer
+Entity --> Repository: Confirmation
+Repository --> Service: Return success
+Service --> Controller: Return success
+Controller --> User: Display success or error
+
+User --> Controller: Run Command to Generate Excel
+Controller --> Service: Generate Excel
+Service --> Repository: Fetch Employer Data
+Repository --> Entity: Fetch Employer Data
+Entity --> Repository: Confirmation
+Repository --> Service: Return Employer Data
+Service --> Controller: Return Employer Data
+Controller --> User: Display Excel File
+
