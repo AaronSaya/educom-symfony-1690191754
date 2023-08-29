@@ -3,11 +3,9 @@
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\User;
-
 use App\Repository\UserRepository;
 use App\Repository\CompanyRepository;
-
+use App\Entity\Company;
 
 class CompanyService {
 
@@ -17,8 +15,7 @@ class CompanyService {
     private $companyRepository;
 
     public function __construct(EntityManagerInterface $em) {
-        $this->userRepository = $em->getRepository(Optreden::class);
-        $this->companyRepository = $em->getRepository(Artiest::class);
+        $this->companyRepository = $em->getRepository(Company::class);
     }
 
     private function fetchUser($id = null) {
@@ -30,19 +27,15 @@ class CompanyService {
         return($this->companyRepository->fetchCompany($id));
     }
 
-    public function saveCompany($params) {
+    public function createCompany($params) {
         $data = [
           "id" => (isset($params["id"]) && $params["id"] != "") ? $params["id"] : null,
-          "omschrijving" => $params["omschrijving"],
-          "datum" => new \DateTime($params["datum"]),
-          "prijs" => $params["prijs"],
-          "ticket_url" => $params["ticket_url"],
-          "afbeelding_url" => $params["afbeelding_url"],              
-          "poppodium" => $this->fetchUser($params["poppodium_id"]),
-          "voorprogramma" => $this->fetchCompany($params["voorprogramma_id"]),
+          "name" => $params["name"],
+          "location" => $params["location"],
+          "logo_url" => $params["logo_url"],            
         ];
 
-        $result = $this->companyRepository->saveCompany($data);
+        $result = $this->companyRepository->createCompany($data);
         return($result);
     }
 }

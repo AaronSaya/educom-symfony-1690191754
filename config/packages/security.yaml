@@ -12,7 +12,7 @@ security:
     access_control:
                - { path: ^/admin, roles: ROLE_ADMIN }
                - { path: ^/profile, roles: ROLE_CANDIDATE }
-               - { path: ^/homepage, roles: ROLE_CANDIDATE }
+               - { path: ^/homepage, roles: PUBLIC_ACCESS }
                - { path: ^/company, roles: ROLE_EMPLOYER }
 
     providers:
