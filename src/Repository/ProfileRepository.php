@@ -21,6 +21,25 @@ class ProfileRepository extends ServiceEntityRepository
         parent::__construct($registry, Profile::class);
     }
 
+    public function saveProfile($params)
+    {
+        $profile = new Profile();
+        $profile->setFirstName($params["first_name"]);
+        $profile->setLastName($params["last_name"]);
+        $profile->setEmail($params["email"]);
+        $profile->setDateOfBirth($params["date_of_birth"]);
+        $profile->setPhonenumber($params["phonenumber"]);
+        $profile->setAddress($params["address"]);
+        $profile->setPostalCode($params["postal_code"]);
+        $profile->setLocation($params["location"]);
+        $profile->setMotivation($params["motivation"]);
+        $profile->setFotoUrl($params["foto_url"]);
+
+        $this->_em->persist($profile);
+        $this->_em->flush();
+
+        return($profile);
+    }
 //    /**
 //     * @return Profile[] Returns an array of Profile objects
 //     */

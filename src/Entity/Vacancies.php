@@ -16,8 +16,9 @@ class Vacancies
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'vacancies', targetEntity: Company::class)]
-    private Collection $company;
+    #[ORM\ManyToOne(inversedBy: 'vacancies')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Company $company = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -31,18 +32,17 @@ class Vacancies
     #[ORM\Column(type: Types::TEXT)]
     private ?string $discription = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $logo_url = null;
-
     #[ORM\Column(length: 50)]
-    private ?string $title = null;
+    private ?string $titleVacancy = null;
 
-    #[ORM\OneToMany(mappedBy: 'vacancy', targetEntity: Activities::class)]
+    #[ORM\Column(length: 255)]
+    private ?string $logoUrl = null;
+
+    #[ORM\OneToMany(mappedBy: 'vacancies', targetEntity: Activities::class)]
     private Collection $activities;
 
     public function __construct()
     {
-        $this->company = new ArrayCollection();
         $this->activities = new ArrayCollection();
     }
 
@@ -51,32 +51,14 @@ class Vacancies
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Company>
-     */
-    public function getCompany(): Collection
+    public function getCompany(): ?Company
     {
         return $this->company;
     }
 
-    public function addCompany(Company $company): static
+    public function setCompany(?Company $company): static
     {
-        if (!$this->company->contains($company)) {
-            $this->company->add($company);
-            $company->setVacancies($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompany(Company $company): static
-    {
-        if ($this->company->removeElement($company)) {
-            // set the owning side to null (unless already changed)
-            if ($company->getVacancies() === $this) {
-                $company->setVacancies(null);
-            }
-        }
+        $this->company = $company;
 
         return $this;
     }
@@ -129,26 +111,26 @@ class Vacancies
         return $this;
     }
 
-    public function getLogoUrl(): ?string
+    public function getTitleVacancy(): ?string
     {
-        return $this->logo_url;
+        return $this->titleVacancy;
     }
 
-    public function setLogoUrl(string $logo_url): static
+    public function setTitleVacancy(string $titleVacancy): static
     {
-        $this->logo_url = $logo_url;
+        $this->titleVacancy = $titleVacancy;
 
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getLogoUrl(): ?string
     {
-        return $this->title;
+        return $this->logoUrl;
     }
 
-    public function setTitle(string $title): static
+    public function setLogoUrl(string $logoUrl): static
     {
-        $this->title = $title;
+        $this->logoUrl = $logoUrl;
 
         return $this;
     }
@@ -165,7 +147,7 @@ class Vacancies
     {
         if (!$this->activities->contains($activity)) {
             $this->activities->add($activity);
-            $activity->setVacancy($this);
+            $activity->setVacancies($this);
         }
 
         return $this;
@@ -175,8 +157,8 @@ class Vacancies
     {
         if ($this->activities->removeElement($activity)) {
             // set the owning side to null (unless already changed)
-            if ($activity->getVacancy() === $this) {
-                $activity->setVacancy(null);
+            if ($activity->getVacancies() === $this) {
+                $activity->setVacancies(null);
             }
         }
 

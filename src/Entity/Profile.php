@@ -21,10 +21,10 @@ class Profile
     private ?User $user = null;
 
     #[ORM\Column(length: 30)]
-    private ?string $first_name = null;
+    private ?string $firstName = null;
 
     #[ORM\Column(length: 30)]
-    private ?string $last_name = null;
+    private ?string $lastName = null;
 
     #[ORM\Column(length: 100)]
     private ?string $email = null;
@@ -38,8 +38,8 @@ class Profile
     #[ORM\Column(length: 50)]
     private ?string $address = null;
 
-    #[ORM\Column(length: 10)]
-    private ?string $postalcode = null;
+    #[ORM\Column(length: 8)]
+    private ?string $postalCode = null;
 
     #[ORM\Column(length: 50)]
     private ?string $location = null;
@@ -47,10 +47,10 @@ class Profile
     #[ORM\Column(type: Types::TEXT)]
     private ?string $motivation = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $foto_url = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fotoUrl = null;
 
-    #[ORM\ManyToMany(targetEntity: Activities::class, mappedBy: 'profile')]
+    #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Activities::class)]
     private Collection $activities;
 
     public function __construct()
@@ -77,24 +77,24 @@ class Profile
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): static
+    public function setFirstName(string $firstName): static
     {
-        $this->first_name = $first_name;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): static
+    public function setLastName(string $lastName): static
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -147,14 +147,14 @@ class Profile
         return $this;
     }
 
-    public function getPostalcode(): ?string
+    public function getPostalCode(): ?string
     {
-        return $this->postalcode;
+        return $this->postalCode;
     }
 
-    public function setPostalcode(string $postalcode): static
+    public function setPostalCode(string $postalCode): static
     {
-        $this->postalcode = $postalcode;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
@@ -185,12 +185,12 @@ class Profile
 
     public function getFotoUrl(): ?string
     {
-        return $this->foto_url;
+        return $this->fotoUrl;
     }
 
-    public function setFotoUrl(string $foto_url): static
+    public function setFotoUrl(?string $fotoUrl): static
     {
-        $this->foto_url = $foto_url;
+        $this->fotoUrl = $fotoUrl;
 
         return $this;
     }
@@ -207,7 +207,7 @@ class Profile
     {
         if (!$this->activities->contains($activity)) {
             $this->activities->add($activity);
-            $activity->addProfile($this);
+            $activity->setProfile($this);
         }
 
         return $this;
@@ -216,7 +216,10 @@ class Profile
     public function removeActivity(Activities $activity): static
     {
         if ($this->activities->removeElement($activity)) {
-            $activity->removeProfile($this);
+            // set the owning side to null (unless already changed)
+            if ($activity->getProfile() === $this) {
+                $activity->setProfile(null);
+            }
         }
 
         return $this;

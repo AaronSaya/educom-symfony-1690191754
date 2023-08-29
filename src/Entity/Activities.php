@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ActivitiesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActivitiesRepository::class)]
@@ -15,58 +13,42 @@ class Activities
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Profile::class, inversedBy: 'activities')]
-    private Collection $profile;
+    #[ORM\ManyToOne(inversedBy: 'activities')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Profile $profile = null;
 
     #[ORM\ManyToOne(inversedBy: 'activities')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Vacancies $vacancy = null;
+    private ?Vacancies $vacancies = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 30)]
     private ?string $status = null;
-
-    public function __construct()
-    {
-        $this->profile = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Profile>
-     */
-    public function getProfile(): Collection
+    public function getProfile(): ?Profile
     {
         return $this->profile;
     }
 
-    public function addProfile(Profile $profile): static
+    public function setProfile(?Profile $profile): static
     {
-        if (!$this->profile->contains($profile)) {
-            $this->profile->add($profile);
-        }
+        $this->profile = $profile;
 
         return $this;
     }
 
-    public function removeProfile(Profile $profile): static
+    public function getVacancies(): ?Vacancies
     {
-        $this->profile->removeElement($profile);
-
-        return $this;
+        return $this->vacancies;
     }
 
-    public function getVacancy(): ?Vacancies
+    public function setVacancies(?Vacancies $vacancies): static
     {
-        return $this->vacancy;
-    }
-
-    public function setVacancy(?Vacancies $vacancy): static
-    {
-        $this->vacancy = $vacancy;
+        $this->vacancies = $vacancies;
 
         return $this;
     }

@@ -9,10 +9,11 @@ security:
                 ROLE_EMPLOYER:    [ROLE_EMPLOYER]
                 ROLE_CANDIDATE:   [ROLE_CANDIDATE]
 
-    # access_control:
-    #            - { path: ^/admin, roles: ROLE_ADMIN }
-    #            - { path: ^/profile, roles: ROLE_CANDIDATE }
-    #            - { path: ^/company, roles: ROLE_EMPLOYER }
+    access_control:
+               - { path: ^/admin, roles: ROLE_ADMIN }
+               - { path: ^/profile, roles: ROLE_CANDIDATE }
+               - { path: ^/homepage, roles: ROLE_CANDIDATE }
+               - { path: ^/company, roles: ROLE_EMPLOYER }
 
     providers:
         app_user_provider:
