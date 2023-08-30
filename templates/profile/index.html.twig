@@ -1,32 +1,30 @@
-<!DOCTYPE html>
+{# {% extends 'base.html.twig' %} #}
 
-{% block title %}Profile{% endblock %}
+{% block title %}Profile Page{% endblock %}
 
 {% block body %}
-<form method="post">
+ You are logged in as {{ app.user.userIdentifier }}
+ <div>
+  {% if isLoggedIn %}
+        <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
+    {% endif %}
+</div>
 
-    <h1 class="h3 mb-3 font-weight-normal">Fill in form</h1>
-    <label for="fname">First name:</label><br>
-    <input type="text" id="fname" name="fname" value="John"><br>
-    <label for="lname">Last name:</label><br>
-    <input type="text" id="lname" name="lname" value="Doe"><br>
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" value="email@example.com"><br>
-    <label for= "date of birth">Date of Birth:</label><br>
-    <input type="date" id="date" name="date" value="DD-MM-YYYY"><br>
-    <label for="phonenumber">Phonenumber: </label><br>
-    <input type="number" id="phonenumber" name="phonenumber" value="+31 6123456"><br>
-    <label for="address">Address:</label><br>
-    <input type="text" id="address" name="address" value=""><br>
-    <label for="location">Location:</label><br>
-    <input type="text" id="location" name="location" value="Maastricht"><br>
-    <label for="postalcode">Postalcode:</label><br>
-    <input type="text" id="postalcode" name="postalcode" value="1234 AA"><br>
-    <label for="myfoto">Foto:</label><br>
-    <input type="text" id="myfoto" name="myfoto"><br>	
+<div class="example-wrapper">
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Submit
-    </button>
-</form>
+   {{ form_start(profileForm) }}
+{{ form_row(profileForm.first_name) }}
+{{ form_row(profileForm.last_name) }}
+{{ form_row(profileForm.date_of_birth) }}
+{{ form_row(profileForm.email) }}
+{{ form_row(profileForm.phonenumber) }}
+{{ form_row(profileForm.foto_url) }}
+{{ form_row(profileForm.address) }}
+{{ form_row(profileForm.postalcode) }}
+{{ form_row(profileForm.location) }}
+{{ form_row(profileForm.motivation) }}
+<button type="submit">Save</button>
+{{ form_end(profileForm) }}
+</div>
+
 {% endblock %}

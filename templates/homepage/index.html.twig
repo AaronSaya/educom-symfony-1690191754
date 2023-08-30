@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+{# {% extends 'base.html.twig' %} #}
 
-<title>Hello HomepageController!</title>
+{% block title %}Hello HompageController!{% endblock %}
 
 {% block body %}
 <style>
@@ -10,11 +10,15 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
-
+       {% for item in data %}
+        {{ item.password }}
+       {% endfor %}
     This friendly message is coming from:
     <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/educom-vac!t/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/educom-vac!t/templates/homepage/index.html.twig'|file_link(0) }}">templates/homepage/index.html.twig</a></code></li>
+        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/educom-vac!t/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/ProfileController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/educom-vac!t/templates/profile/index.html.twig'|file_link(0) }}">templates/profile/index.html.twig</a></code></li>
     </ul>
 </div>
+
+
 {% endblock %}

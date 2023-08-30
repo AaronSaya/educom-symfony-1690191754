@@ -25,11 +25,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    public function getUser($id)
-    {
-        $user = $this->find($id); 
-        return $user;
-    }
+    // public function getUser($id)
+    // {
+    //     $user = $this->find($id); 
+    //     return $user;
+    // }
 
     public function getAllUsers() 
     {

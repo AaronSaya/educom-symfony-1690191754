@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Profile;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,6 +37,11 @@ class RegistrationController extends AbstractController
             $user->setRoles(['ROLE_CANDIDATE']);
 
             $entityManager->persist($user);
+
+            // Create a new profile and link it to the user
+            $profile = new Profile();
+            $user->setProfile($profile);
+
             $entityManager->flush();
             // do anything else you need here, like send an email
 
@@ -44,6 +50,8 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 $request
             );
+
+            return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('registration/register.html.twig', [
