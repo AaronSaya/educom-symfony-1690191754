@@ -39,7 +39,6 @@ class ProfileController extends AbstractController
             'profile' => $profile,
             'profileForm' => $form->createView(),
             'isLoggedIn' => $isLoggedIn,
-            dump($isLoggedIn),
         ]);
     }
 
