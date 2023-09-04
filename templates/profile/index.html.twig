@@ -1,14 +1,14 @@
-{# {% extends 'base.html.twig' %} #}
+{% extends 'base.html.twig' %}
 
 {% block title %}Profile Page{% endblock %}
 
 {% block body %}
- You are logged in as {{ app.user.userIdentifier }}
+ You are logged in as {{ app.user.userIdentifier }}</br>
  <div>
-  {% if isLoggedIn %}
-        <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
-    {% endif %}
-</div>
+        {% if isLoggedIn %}
+            <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a></br>
+        {% endif %}
+    </div>
 
 <div class="example-wrapper">
 

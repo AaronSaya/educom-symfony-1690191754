@@ -30,12 +30,16 @@ class ProfileController extends AbstractController
     
         $form = $this->createForm(ProfileFormType::class, $profile);
         $form->handleRequest($request);
+
+        $isLoggedIn = $this->isGranted('IS_AUTHENTICATED_FULLY'); 
+
     
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
             'profile' => $profile,
             'profileForm' => $form->createView(),
-            'isLoggedIn' => $this->security->isGranted('IS_AUTHENTICATED_FULLY'),
+            'isLoggedIn' => $isLoggedIn,
+            dump($isLoggedIn),
         ]);
     }
 
@@ -84,5 +88,11 @@ class ProfileController extends AbstractController
         $this->profileService->deleteProfile($profile);
 
         return $this->redirectToRoute('app_homepage');
+    }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(): void
+    {
+       
     }
 }
