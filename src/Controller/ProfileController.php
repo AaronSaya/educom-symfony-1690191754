@@ -42,7 +42,6 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/edit', name: 'app_profile_edit')]
     public function edit(Request $request): Response
     {
         $user = $this->security->getUser(); 
@@ -61,8 +60,6 @@ class ProfileController extends AbstractController
             // Update user data
             $this->profileService->updateProfile($profile);
     
-            $this->addFlash('success', 'Your profile has been updated successfully.');
-    
             return $this->redirectToRoute('app_profile_edit');
         }
     
@@ -73,14 +70,13 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/delete', name: 'app_profile_delete')]
     public function delete(): Response
     {
         $user = $this->security->getUser(); 
         $profile = $this->profileService->getProfile($user); 
 
         if (!$profile) {
-            $this->addFlash('error', 'Profile not found.');
+           
             return $this->redirectToRoute('app_profile');
         }
 
@@ -89,9 +85,4 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('app_homepage');
     }
 
-    #[Route('/logout', name: 'app_logout')]
-    public function logout(): void
-    {
-       
-    }
 }

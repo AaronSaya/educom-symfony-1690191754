@@ -22,7 +22,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'app:imortCompany',
     description: 'Import Company Excel',
 )]
-class ImportSpreadsheetCommand extends Command
+class ImportCompanyCommand extends Command
 {
     protected function configure()
     {
@@ -36,7 +36,7 @@ class ImportSpreadsheetCommand extends Command
     {
 
         $io= 
-        
+
         $inputFileName = $input->getArgument('file');
         $spreadsheet = IOFactory::load($inputFileName);
 
