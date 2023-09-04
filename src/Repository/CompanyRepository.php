@@ -69,4 +69,6 @@ class CompanyRepository extends ServiceEntityRepository
         $this->_em->remove($company);
         $this->_em->flush();
     }
+
+    
 }
