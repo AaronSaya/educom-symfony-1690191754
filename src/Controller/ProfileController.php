@@ -2,87 +2,92 @@
 
 namespace App\Controller;
 
-use App\Form\ProfileFormType; 
+use App\Entity\Profile;
+
+use App\Service\ProfileService;
+use App\Service\UserService;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\ProfileService;
 use Symfony\Component\Security\Core\Security;
 
 
 class ProfileController extends AbstractController
 {
     private $profileService;
+    private $userService;
     private $security;
 
-    public function __construct(ProfileService $profileService, Security $security)
+public function __construct(ProfileService $profileService, UserService $userService, Security $security)
     {
         $this->profileService = $profileService;
+        $this->userService = $userService;
         $this->security = $security;
     }
 
     #[Route('/profile', name: 'app_profile')]
-    public function index(Request $request): Response
+    public function index() 
     {
-        $user = $this->security->getUser();
-        $profile = $this->profileService->getProfile($user);
-    
-        $form = $this->createForm(ProfileFormType::class, $profile);
-        $form->handleRequest($request);
+        
+            if (!$this->security->isGranted('IS_AUTHENTICATED_FULLY')) {
+                throw new AccessDeniedException('Toegang geweigerd. Log in om je profiel te bekijken.');
+            }
 
-        $isLoggedIn = $this->isGranted('IS_AUTHENTICATED_FULLY'); 
+            $user = $this->userService->getUser();
+            $profile = $this->profileService->getProfile($user);
 
-    
-        return $this->render('profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
-            'profile' => $profile,
-            'profileForm' => $form->createView(),
-            'isLoggedIn' => $isLoggedIn,
-        ]);
-    }
-
-    public function edit(Request $request): Response
-    {
-        $user = $this->security->getUser(); 
-        $profile = $this->profileService->getProfile($user); 
-    
-        if (!$profile) {
-            // Redirect or show an error message
-            $this->addFlash('error', 'Profile not found.');
-            return $this->redirectToRoute('app_profile'); // Redirect back to the profile page
-        }
-    
-        $form = $this->createForm(ProfileFormType::class, $profile);
-        $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Update user data
-            $this->profileService->updateProfile($profile);
-    
-            return $this->redirectToRoute('app_profile_edit');
-        }
-    
-        return $this->render('profile/edit.html.twig', [
-            'controller_name' => 'ProfileController',
-            'profile' => $profile,
-            'profileForm' => $form->createView(),
-        ]);
-    }
-
-    public function delete(): Response
-    {
-        $user = $this->security->getUser(); 
-        $profile = $this->profileService->getProfile($user); 
-
-        if (!$profile) {
-           
-            return $this->redirectToRoute('app_profile');
+            if($profile){
+                $data = $profile;
+            } else {
+                
+            $data = [
+                'first_name' => '',
+                'last_name' => '',
+                'date_of_birth' => '',
+                'email' => '',
+                'phonenumber' => '',
+                'address' => '',
+                'postalcode' => '',
+                'location' => '',
+                'motivation' => '',
+                'foto_url' => '',
+                ];
+            }
+            return $this->render('profile/index.html.twig', [
+                'data' => $data,
+            ]);
         }
 
-        $this->profileService->deleteProfile($profile);
 
-        return $this->redirectToRoute('app_homepage');
-    }
+       #[Route('/profile/save', name: 'app_save_profile', methods:("POST"))]
+       public function saveUpdateProfile(Request $request): Response
+       {
+        
+        $data = $request->request->all();
+        $user = $this->getUser();
 
+        $this->profileService->saveUpdateProfile($data, $user);
+
+        $this->addFlash('success', 'Profiel bijgewerkt!');
+
+        return $this->redirectToRoute('app_profile');
+       }
+
+        // public function delete(): Response
+        // {
+        //     $user = $this->security->getUser(); 
+        //     $profile = $this->profileService->getProfile($user); 
+
+        //     if (!$profile) {
+            
+        //         return $this->redirectToRoute('app_profile');
+        //     }
+
+        //     $this->profileService->deleteProfile($profile);
+
+        //     return $this->redirectToRoute('app_homepage');
+        // }
 }

@@ -15,14 +15,9 @@ class ProfileService
         $this->profileRepository = $profileRepository;
     }
 
-    public function createProfile(array $profileData): Profile
+    public function saveUpdateProfile(array $data, User $user): Profile
     {
-        return $this->profileRepository->createProfile($profileData);
-    }
-
-    public function updateProfile(Profile $profile): Profile
-    {
-        return $this->profileRepository->updateProfile($profile);
+        return $this->profileRepository->saveUpdateProfile($data, $user);
     }
 
     public function deleteProfile(Profile $profile): void
@@ -32,7 +27,7 @@ class ProfileService
 
     public function getProfile(User $user): ?Profile
     {
-        return $user->getProfile();
+        return $this->profileRepository->findOneBy(['user' => $user]);
     }
 
     public function getProfileById(int $profileId): ?Profile

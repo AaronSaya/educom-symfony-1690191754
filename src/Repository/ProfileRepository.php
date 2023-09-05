@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<Profile>
  *
@@ -23,6 +24,7 @@ class ProfileRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Profile::class);
+        $this->entityManager = $this->getEntityManager();
     }
 
 //    /**
@@ -50,10 +52,20 @@ class ProfileRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-public function createProfile(array $profileData): Profile
+public function saveUpdateProfile(array $data, $user): Profile
     {
-        $profile = new Profile();
-        $this->updateProfileFromData($profile, $profileData);
+
+        $profile = $this->getProfile ($user);
+        $profile->setFirstName($data['firstName']);
+        $profile->setLastName($data['lastName']);
+        $profile->setDateOfBirth($data['dateOfBirth']);
+        $profile->setEmail($data['email']);
+        $profile->setPhonenumber($data['phonenumber']);
+        $profile->setFotoUrl($data['fotoUrl']);
+        $profile->setAddress($data['address']);
+        $profile->setPostalcode($data['postalcode']);
+        $profile->setLocation($data['location']);
+        $profile->setMotivation($data['motivation']);
         
         $this->entityManager->persist($profile);
         $this->entityManager->flush();
@@ -61,26 +73,6 @@ public function createProfile(array $profileData): Profile
         return $profile;
     }
 
-    public function updateProfile(Profile $profile): Profile
-{
-    $this->entityManager->flush();
-
-    return $profile;
-}
-    private function updateProfileFromData(Profile $profile, array $profileData): void
-    {
-        $profile->setFirstName($profileData['first_name']);
-        $profile->setLastName($profileData['last_name']);
-        $profile->setDateOfBirth($profileData['date_of_birth']);
-        $profile->setEmail($profileData['email']);
-        $profile->setPhonenumber($profileData['phonenumber']);
-        $profile->setFotoUrl($profileData['foto_url']);
-        $profile->setAddress($profileData['address']);
-        $profile->setPostalcode($profileData['postalcode']);
-        $profile->setLocation($profileData['location']);
-        $profile->setMotivation($profileData['motivation']);
-    
-    }
 
     public function deleteProfile(Profile $profile): void
     {
