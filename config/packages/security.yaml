@@ -8,6 +8,7 @@ security:
                 ROLE_ADMIN:       [ROLE_ADMIN]
                 ROLE_EMPLOYER:    [ROLE_EMPLOYER]
                 ROLE_CANDIDATE:   [ROLE_CANDIDATE]
+                PUBLIC_ACCESS:    []
 
     access_control:
                - { path: ^/admin, roles: ROLE_ADMIN }

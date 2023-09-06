@@ -1,20 +1,20 @@
-<!DOCTYPE html>
 {% extends 'base.html.twig' %}
 
-<title>Register</title>
 
 {% block body %}
     <h1>Register</h1>
 
-    {{ form_errors(registrationForm) }}
+    <form method="POST" action="{{ path('app_save_register') }}">
+        <label for="username">Username:</label>
+       <input type="text" id="username" name="username"<br>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password"><br>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+         <label for="Authenticator ">Confirm Password:</label>
+        <input type="text" id="Authenticator" name="Authenticator"><br>
+
+        <button type="submit">Opslaan</button>
+    </form>
+
 {% endblock %}

@@ -5,18 +5,21 @@ namespace App\Service;
 use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
+use App\Repository\UserRepository;
 
 class UserService
 {
     private $security;
     private $entityManager;
+    private $userRepository;
 
-    public function __construct(Security $security, EntityManagerInterface $entityManager)
+    public function __construct(UserRepository $userRepository, Security $security, EntityManagerInterface $entityManager)
     {
         // Avoid calling getUser() in the constructor: auth may not
         // be complete yet. Instead, store the entire Security object.
         $this->security = $security;
         $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
     }
 
     public function getUser()
@@ -35,15 +38,7 @@ class UserService
 
     public function createUser(array $userData): User
     {
-        $user = new User();
-        $user->setUsername($userData['username']);
-        $user->setPassword($userData['password']);
-        // ... set other properties ...
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
-        return $user;
+        return $this->userRepository->createUser($userData);
     }
 
     public function updateUser(User $user, array $userData): User

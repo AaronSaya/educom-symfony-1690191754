@@ -27,35 +27,41 @@ class ProfileRepository extends ServiceEntityRepository
         $this->entityManager = $this->getEntityManager();
     }
 
-//    /**
-//     * @return Profile[] Returns an array of Profile objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Profile[] Returns an array of Profile objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Profile
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Profile
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
-public function saveUpdateProfile(array $data, $user): Profile
+    public function saveUpdateProfile(array $data, $user): Profile
     {
 
-        $profile = $this->getProfile ($user);
+        $profile = $this->getProfile($user);
+
+        if (!$profile) {
+            $profile = new Profile();
+            $profile->setUser($user);
+        }
+
         $profile->setFirstName($data['firstName']);
         $profile->setLastName($data['lastName']);
         $profile->setDateOfBirth($data['dateOfBirth']);
@@ -66,7 +72,7 @@ public function saveUpdateProfile(array $data, $user): Profile
         $profile->setPostalcode($data['postalcode']);
         $profile->setLocation($data['location']);
         $profile->setMotivation($data['motivation']);
-        
+
         $this->entityManager->persist($profile);
         $this->entityManager->flush();
 

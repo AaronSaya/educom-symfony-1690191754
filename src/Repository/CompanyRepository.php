@@ -17,25 +17,24 @@ class CompanyRepository extends ServiceEntityRepository
         parent::__construct($registry, Company::class);
     }
 
-    public function createCompanyAndUser(
-        string $name,
-        string $address,
-        string $location,
-        string $postalCode,
-        string $email,
-        string $phonenumber
-    ): void {
+    public function saveCompany($data)
+    {
+        foreach ($data as $key){
+        
         $company = new Company();
-        $company->setName($name);
-        $company->setAddress($address);
-        $company->setLocation($location);
-        $company->setPostalCode($postalCode);
-        $company->setEmail($email);
-        $company->setPhonenumber($phonenumber);
+        $company->setName($key['0']);
+        $company->setAddress($key['1']);
+        $company->setLocation($key['2']);
+        $company->setPostalCode($key['3']);
+        $company->setEmail($key['4']);
+        $company->setPhonenumber($key['5']);
+        $company->setLogoUrl($key['6']);
 
+        $this->_em->persist($company);
+        
         // Generate username and password
-        $username = strtolower($name);
-        $password = $name;
+        $username = strtolower($key['0']);
+        $password = $key['0'];
 
         $user = new User();
         $user->setUsername($username);
@@ -46,6 +45,9 @@ class CompanyRepository extends ServiceEntityRepository
 
         $this->_em->persist($company);
         $this->_em->flush();
+
+        }
+        return $company;
     }
 
     public function findAllCompanies(): array

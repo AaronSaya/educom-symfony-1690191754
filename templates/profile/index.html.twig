@@ -9,35 +9,36 @@
   <h1>Profiel</h1>
 
      <form method="POST" action="{{ path('app_save_profile') }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('CSRF') }}">
         <label for="firstName">Voornaam:</label>
-        <input type="text" id="firstName" name="firstName" value="{{ data.firstName }}"><br>
+        <input type="text" id="firstName" name="firstName" value="{{ data.firstName ?? '' }}"><br>
 
         <label for="lastName">Achternaam:</label>
-        <input type="text" id="lastName" name="lastName" value="{{ data.lastName }}"><br>
+        <input type="text" id="lastName" name="lastName" value="{{ data.lastName ?? ''  }}"><br>
 
         <label for="dateOfBirth">Geboortedatum:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" value="{{ data.dateOfBirth }}"><br>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" value="{{ data.dateOfBirth ?? ''  }}"><br>
 
         <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" value="{{ data.email }}"><br>
+        <input type="email" id="email" name="email" value="{{ data.email ?? ''  }}"><br>
 
         <label for="phonenumber">Telefoonnummer:</label>
-        <input type="tel" id="phonenumber" name="phonenumber" value="{{ data.phonenumber }}"><br>
+        <input type="tel" id="phonenumber" name="phonenumber" value="{{ data.phonenumber ?? ''  }}"><br>
 
         <label for="address">Adres:</label>
-        <input type="text" id="address" name="address" value="{{ data.address }}"><br>
+        <input type="text" id="address" name="address" value="{{ data.address ?? ''  }}"><br>
 
         <label for="postalcode">Postcode:</label>
-        <input type="text" id="postalcode" name="postalcode" value="{{ data.postalcode }}"><br>
+        <input type="text" id="postalcode" name="postalcode" value="{{ data.postalcode ?? ''  }}"><br>
 
         <label for="location">Locatie:</label>
-        <input type="text" id="location" name="location" value="{{ data.location }}"><br>
+        <input type="text" id="location" name="location" value="{{ data.location ?? ''  }}"><br>
 
         <label for="motivation">Motivatie:</label>
-        <textarea id="motivation" name="motivation">{{ data.motivation }}</textarea><br>
+        <textarea id="motivation" name="motivation">{{ data.motivation ?? ''  }}</textarea><br>
 
         <label for="fotoUrl">Foto URL:</label>
-        <input type="text" id="fotoUrl" name="fotoUrl" value="{{ data.fotoUrl }}"><br>
+        <input type="text" id="fotoUrl" name="fotoUrl" value="{{ data.fotoUrl ?? ''  }}"><br>
 
         <button type="submit">Opslaan</button>
     </form>

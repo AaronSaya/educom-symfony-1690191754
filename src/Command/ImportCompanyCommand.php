@@ -5,6 +5,8 @@ namespace App\Command;
 use App\Entity\Company;
 use App\Entity\User;
 
+use App\Service\ImportCompanyService;
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -24,6 +26,14 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ImportCompanyCommand extends Command
 {
+    private $importcompanyservice;
+
+    public function __construct(ImportCompanyService $importcompanyservice){
+        $this->importcompanyservice = $importcompanyservice;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -35,12 +45,19 @@ class ImportCompanyCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)                             
     {
 
-        $io= 
+        $io = new SymfonyStyle($input, $output);
 
         $inputFileName = $input->getArgument('file');
-        $spreadsheet = IOFactory::load($inputFileName);
+        $reader = new Xlsx();
+        $path = 'documents/Excel/'. $inputFileName . '.xlsx';
+        $spreadsheet = $reader->load($path);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $data = $worksheet->toArray();
+
+        $this->importcompanyservice->saveCompany($data);
 
 
+        $io->success('Your file has been added to the database');
 
         return Command::SUCCESS;
     } 

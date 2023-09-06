@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Profile;
-
 use App\Service\ProfileService;
 use App\Service\UserService;
 
@@ -71,7 +69,6 @@ public function __construct(ProfileService $profileService, UserService $userSer
 
         $this->profileService->saveUpdateProfile($data, $user);
 
-        $this->addFlash('success', 'Profiel bijgewerkt!');
 
         return $this->redirectToRoute('app_profile');
        }
