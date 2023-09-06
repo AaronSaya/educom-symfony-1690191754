@@ -2,34 +2,33 @@
 
 namespace App\Command;
 
-use App\Entity\Company;
-use App\Entity\User;
-
 use App\Service\ImportCompanyService;
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 #[AsCommand(
-    name: 'app:imortCompany',
+    name: 'app:importCompany',
     description: 'Import Company Excel',
 )]
 class ImportCompanyCommand extends Command
 {
     private $importcompanyservice;
+    private $passwordHasher;
+    private $csrfTokenManager;
 
-    public function __construct(ImportCompanyService $importcompanyservice){
+    public function __construct(ImportCompanyService $importcompanyservice,  UserPasswordHasherInterface $passwordHasher,CsrfTokenManagerInterface $csrfTokenManager){
         $this->importcompanyservice = $importcompanyservice;
+        $this->passwordHasher = $passwordHasher;
+        $this->csrfTokenManager = $csrfTokenManager;
 
         parent::__construct();
     }
@@ -46,6 +45,7 @@ class ImportCompanyCommand extends Command
     {
 
         $io = new SymfonyStyle($input, $output);
+        $csrfToken = $this->csrfTokenManager->getToken('import_company')->getValue();
 
         $inputFileName = $input->getArgument('file');
         $reader = new Xlsx();
@@ -54,7 +54,7 @@ class ImportCompanyCommand extends Command
         $worksheet = $spreadsheet->getActiveSheet();
         $data = $worksheet->toArray();
 
-        $this->importcompanyservice->saveCompany($data);
+        $this->importcompanyservice->saveCompany($data, $csrfToken , $this->passwordHasher);
 
 
         $io->success('Your file has been added to the database');

@@ -6,46 +6,50 @@ use App\Entity\User;
 use App\Entity\Company;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-/**
- * @extends ServiceEntityRepository<Company>
- */
 class CompanyRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $passwordHasher;
+    private $csrfTokenManager;
+
+    public function __construct(ManagerRegistry $registry, UserPasswordHasherInterface $passwordHasher, CsrfTokenManagerInterface $csrfTokenManager)
     {
         parent::__construct($registry, Company::class);
+        $this->passwordHasher = $passwordHasher;
+        $this->csrfTokenManager = $csrfTokenManager;
     }
 
     public function saveCompany($data)
     {
-        foreach ($data as $key){
-        
-        $company = new Company();
-        $company->setName($key['0']);
-        $company->setAddress($key['1']);
-        $company->setLocation($key['2']);
-        $company->setPostalCode($key['3']);
-        $company->setEmail($key['4']);
-        $company->setPhonenumber($key['5']);
-        $company->setLogoUrl($key['6']);
+        foreach ($data as $key) {
 
-        $this->_em->persist($company);
-        
-        // Generate username and password
-        $username = strtolower($key['0']);
-        $password = $key['0'];
+            $company = new Company();
+            $company->setName($key['0']);
+            $company->setAddress($key['1']);
+            $company->setLocation($key['2']);
+            $company->setPostalCode($key['3']);
+            $company->setEmail($key['4']);
+            $company->setPhonenumber($key['5']);
+            $company->setLogoUrl($key['6']);
 
-        $user = new User();
-        $user->setUsername($username);
-        $user->setPassword($password); // You can update this to use hashing
-        $user->setRoles(['ROLE_EMPLOYER']);
+            $this->_em->persist($company);
 
-        $company->setUser($user);
+            // Generate username and password
+            $username = strtolower($key['0']);
+            $password = $key['0'];
 
-        $this->_em->persist($company);
-        $this->_em->flush();
+            $user = new User();
+            $user->setUsername($username);
+            $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
+            $user->setPassword($hashedPassword);
+            $user->setRoles(['ROLE_EMPLOYER']);
 
+            $company->setUser($user);
+
+            $this->_em->persist($company);
+            $this->_em->flush();
         }
         return $company;
     }
@@ -71,6 +75,4 @@ class CompanyRepository extends ServiceEntityRepository
         $this->_em->remove($company);
         $this->_em->flush();
     }
-
-    
 }

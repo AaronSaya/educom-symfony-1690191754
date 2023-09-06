@@ -35,9 +35,6 @@ class Company
     #[ORM\Column(length: 255)]
     private ?string $logoUrl = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -130,17 +127,17 @@ class Company
     #[ORM\OneToOne(targetEntity: User::class, mappedBy: "company", cascade: ["persist", "remove"])]
     private $user;
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
+    // public function getPassword(): ?string
+    // {
+    //     return $this->password;
+    // }
 
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
+    // public function setPassword(string $password): self
+    // {
+    //     $this->password = $password;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getUser(): ?User
     {
