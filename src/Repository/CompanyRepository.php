@@ -64,11 +64,6 @@ class CompanyRepository extends ServiceEntityRepository
         return $this->find($id);
     }
 
-    public function getCompany(User $user): ?Company
-    {
-        return $this->findOneBy(['user' => $user]);
-    }
-
     public function updateCompany(Company $company): void
     {
         $this->_em->persist($company);
