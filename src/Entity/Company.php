@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompanyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -125,19 +127,8 @@ class Company
     }
 
     #[ORM\OneToOne(targetEntity: User::class, mappedBy: "company", cascade: ["persist", "remove"])]
+    #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id")]
     private $user;
-
-    // public function getPassword(): ?string
-    // {
-    //     return $this->password;
-    // }
-
-    // public function setPassword(string $password): self
-    // {
-    //     $this->password = $password;
-
-    //     return $this;
-    // }
 
     public function getUser(): ?User
     {
@@ -147,6 +138,45 @@ class Company
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Vacancies::class)]
+    private Collection $vacancies;
+
+    public function __construct()
+    {
+        $this->vacancies = new ArrayCollection();
+    }
+
+
+    /**
+     * @return Collection<int, Vacancies>
+     */
+    public function getVacancies(): Collection
+    {
+        return $this->vacancies;
+    }
+
+    public function addVacancy(Vacancies $vacancy): static
+    {
+        if (!$this->vacancies->contains($vacancy)) {
+            $this->vacancies->add($vacancy);
+            $vacancy->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVacancy(Vacancies $vacancy): static
+    {
+        if ($this->vacancies->removeElement($vacancy)) {
+            // set the owning side to null (unless already changed)
+            if ($vacancy->getCompany() === $this) {
+                $vacancy->setCompany(null);
+            }
+        }
 
         return $this;
     }

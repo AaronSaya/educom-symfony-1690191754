@@ -23,4 +23,9 @@ class ImportCompanyService
     {
         $this->companyRepository->saveCompany($data, $passwordHasher, $csrfToken);
        }
+
+    public function getCompany($user)
+    {
+        $this->companyRepository->getCompany($user);
+    }
 }

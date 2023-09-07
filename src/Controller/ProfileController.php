@@ -54,7 +54,7 @@ public function __construct(ProfileService $profileService, UserService $userSer
                 'foto_url' => '',
                 ];
             }
-            return $this->render('profile/index.html.twig', [
+            return $this->render('profile/profile.html.twig', [
                 'data' => $data,
             ]);
         }
