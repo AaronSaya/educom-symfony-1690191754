@@ -28,7 +28,7 @@ class CompanyController extends AbstractController
     {
         $user = $this->userService->getUser();
         $company = $this->importcompanyservice->getCompany($user);
-
+        dd($company);
 
 
 

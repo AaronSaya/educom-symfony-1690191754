@@ -127,7 +127,7 @@ class Company
     }
 
     #[ORM\OneToOne(targetEntity: User::class, mappedBy: "company", cascade: ["persist", "remove"])]
-    #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id")]
+    #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id", nullable: false)]
     private $user;
 
     public function getUser(): ?User
