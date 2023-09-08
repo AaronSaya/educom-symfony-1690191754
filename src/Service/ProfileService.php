@@ -34,4 +34,9 @@ class ProfileService
     {
         return $this->profileRepository->find($profileId);
     }
+
+    public function createProfile($data, $user): ?Profile
+    {
+        return $this->profileRepository->createProfile($data, $user);
+    }
 }

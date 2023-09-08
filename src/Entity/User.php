@@ -58,11 +58,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity:"App\Entity\Profile",mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Profile $profile = null;
-
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Company $company = null;
 
     public function getId(): ?int
     {
@@ -237,6 +234,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    #[ORM\OneToOne(targetEntity:"App\Entity\Company",mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Company $company = null;
 
     public function getCompany(): ?Company
     {

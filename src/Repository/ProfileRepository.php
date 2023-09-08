@@ -6,6 +6,7 @@ use App\Entity\Profile;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 
 
 /**
@@ -20,11 +21,13 @@ class ProfileRepository extends ServiceEntityRepository
 {
 
     private $entityManager;
+    private $security;
 
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,  Security $security)
     {
         parent::__construct($registry, Profile::class);
         $this->entityManager = $this->getEntityManager();
+        $this->security = $security;
     }
 
     //    /**
@@ -62,8 +65,8 @@ class ProfileRepository extends ServiceEntityRepository
             $profile->setUser($user);
         }
 
-        $profile->setFirstName($data['firstName']);
-        $profile->setLastName($data['lastName']);
+        $profile->setFirstName($data['firstname']);
+        $profile->setLastName($data['lastname']);
         $profile->setDateOfBirth($data['dateOfBirth']);
         $profile->setEmail($data['email']);
         $profile->setPhonenumber($data['phonenumber']);
@@ -94,5 +97,17 @@ class ProfileRepository extends ServiceEntityRepository
     public function getProfileById(int $profileId): ?Profile
     {
         return $this->entityManager->getRepository(Profile::class)->find($profileId);
+    }
+
+    public function createProfile(array $data, User $user): Profile
+    {
+        $profile = new Profile();
+
+        $profile->setUser($user);
+
+        $this->getEntityManager()->persist($profile);
+        $this->getEntityManager()->flush();
+
+        return $profile;
     }
 }

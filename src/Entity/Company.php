@@ -126,7 +126,7 @@ class Company
         return $this;
     }
 
-    #[ORM\OneToOne(targetEntity: User::class, mappedBy: "company", cascade: ["persist", "remove"])]
+    #[ORM\OneToOne(targetEntity:"App\Entity\User", inversedBy:"company", cascade: ["persist", "remove"])]
     #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id", nullable: false)]
     private $user;
 

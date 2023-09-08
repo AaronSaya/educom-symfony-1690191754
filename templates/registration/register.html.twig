@@ -4,17 +4,25 @@
 {% block body %}
     <h1>Register</h1>
 
-    <form method="POST" action="{{ path('app_save_register') }}">
-        <label for="username">Username:</label>
-       <input type="text" id="username" name="username"<br>
+  <form method="POST" action="{{ path('app_save_register') }}" onsubmit="disableSubmitButton()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username"><br>
 
-        <label for="password">Password:</label>
-        <input type="text" id="password" name="password"><br>
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password"><br>
 
-         <label for="Authenticator ">Confirm Password:</label>
-        <input type="text" id="Authenticator" name="Authenticator"><br>
+    <label for="Authenticator">Confirm Password:</label>
+    <input type="text" id="Authenticator" name="Authenticator"><br>
 
-        <button type="submit">Opslaan</button>
-    </form>
+    <input type="hidden" name="_token" value="{{ csrf_token('CSRF') }}"> <!-- CSRF-token toevoegen -->
+    
+    <button type="submit" id="submit-button">Opslaan</button>
+</form>
+
+<script>
+function disableSubmitButton() {
+    document.getElementById('submit-button').disabled = true;
+}
+</script>
 
 {% endblock %}

@@ -41,7 +41,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/register/save', name: 'app_save_register', methods: ("POST"))]
+    #[Route('/register/save', name: 'app_save_register', methods: "POST")]
     public function createUser(Request $request,CsrfTokenManagerInterface $csrfTokenManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $csrfToken = $request->request->get('_token');
@@ -50,7 +50,7 @@ class RegistrationController extends AbstractController
         }
         $userData = $request->request->all();
 
-        if ($userData['password'] !== $userData['Authenticator']) {
+        if ($userData['password'] !== $userData['authenticator']) {
 
             return $this->redirectToRoute('app_register');
         }

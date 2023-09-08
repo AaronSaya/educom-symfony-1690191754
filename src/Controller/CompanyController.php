@@ -27,14 +27,9 @@ class CompanyController extends AbstractController
     public function index(): Response
     {
         $user = $this->userService->getUser();
-        dd($user);
-
-
-
-
 
         return $this->render('company/company.html.twig', [
-            'company' => $user,
+            'user' => $user,
         ]);
     }
 }

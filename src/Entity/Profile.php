@@ -13,8 +13,8 @@ class Profile
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'profile', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\OneToOne(targetEntity:"App\Entity\User", inversedBy:"profile", cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false, name:"user_id", referencedColumnName:"id")]
     private ?User $user = null;
 
     #[ORM\Column(length: 30)]

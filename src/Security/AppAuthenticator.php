@@ -49,7 +49,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
         foreach ($roles as $role) {
             if ($role === 'ROLE_CANDIDATE') {
-                return new RedirectResponse($this->urlGenerator->generate('app_profile'));
+                return new RedirectResponse($this->urlGenerator->generate('get_profile'));
             }
     
             if ($role === 'ROLE_EMPLOYER') {
