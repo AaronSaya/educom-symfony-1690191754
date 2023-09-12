@@ -8,13 +8,14 @@
 </head>
 <body>
       <header>
-    
     <nav>
         <ul>
             <li><a href="{{ path('homepage') }}">Home</a></li>
             <li><a href="{{ path('app_register') }}">Register</a></li>
             <li><a href="{{ path('app_login') }}">Login</a></li>
-            <li><a href="{{ path('app_logout') }}">Logout</a></li>
+              {% if app.user %}
+            <li>You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a></li>
+             {% endif %}
             <!-- Add more navigation links as needed -->
         </ul>
     </nav>

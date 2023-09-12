@@ -7,9 +7,12 @@
 <div>
     <p><img src="{{ vacancy.logoFunctionUrl }}" alt="Vacaturelogo"></p>
    <p><h4>Titel</h4>{{vacancy.title}}</p>
-   {# <p>{{vacancy.date}}</p> #}
+   <p><h4>Datum</h4>{{vacancy.date | date("m/d/Y")}}</p>
    <p><h4>Niveau</h4>{{vacancy.level}}</p>
    <p><h4>Locatie</h4>{{vacancy.location}}</p>
-   <p><h4>Omschrijving</h4>{{vacancy.description}}</p>
+   <p><h4>Omschrijving</h4>{{vacancy.description}}</p> 
+  <a href="{{ path('apply_detailpage', {'id': vacancy.id}) }}" class="btn btn-primary">Solliciteer</a>
+
 </div>
+
 {% endblock %}
