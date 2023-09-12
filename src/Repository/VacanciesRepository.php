@@ -67,6 +67,12 @@ class VacanciesRepository extends ServiceEntityRepository
          $this->_em->remove($vacancy);
          $this->_em->flush();
     }
+
+    public function getAllVacancies(): array
+    {
+        $vacancies = $this->findAll();
+        return($vacancies);
+    }
 }
 
 //    /**

@@ -3,20 +3,21 @@
 {% block title %}Hello HompageController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-       {% for item in data %}
-        {{ item.password }}
-       {% endfor %}
-    This friendly message is coming from:
+<div>
+    <h1>Vacatures</h1>
+      
+   
     <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/educom-vac!t/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/ProfileController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/educom-vac!t/templates/profile/index.html.twig'|file_link(0) }}">templates/profile/index.html.twig</a></code></li>
+     {% for item in vacancies %}
+     <form>
+        <li>
+         <p>{{ item.title }}</p>
+         <p><img src="{{ item.logoFunctionUrl }}" alt="Vacaturelogo"></p>
+         <a href="{{ path('detailpage', {'id': item.id}) }}">Solliciteer</a>
+        </li>
+     </form>
+     {% endfor %}
     </ul>
 </div>
 

@@ -62,6 +62,11 @@ public function removeVacancy($vacancy)
 {
  return $this->vacanciesRepository->removeVacancy($vacancy);
 }
+
+public function getAllVacancies()
+{
+    return $this->vacanciesRepository->getAllVacancies();
+}
     // public function updateUser(Vacancies $user, array $userData): Vacancies
     // {
     //     // Update the properties of the user entity based on $userData
