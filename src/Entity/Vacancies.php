@@ -31,7 +31,7 @@ class Vacancies
     private ?string $location = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $discription = null;
+    private ?string $description = null;
 
     #[ORM\Column(length: 255)]
     private ?string $logoFunctionUrl = null;
@@ -101,14 +101,14 @@ class Vacancies
         return $this;
     }
 
-    public function getDiscription(): ?string
+    public function getDescription(): ?string
     {
-        return $this->discription;
+        return $this->description;
     }
 
-    public function setDiscription(string $discription): static
+    public function setDescription(string $description): static
     {
-        $this->discription = $discription;
+        $this->description = $description;
 
         return $this;
     }

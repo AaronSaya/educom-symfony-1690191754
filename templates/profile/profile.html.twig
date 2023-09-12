@@ -7,6 +7,8 @@
 
   <h1>Profiel</h1>
 
+  <p><img src="{{ profile.fotoUrl }}" alt="Profielfoto"></p>
+
   <form method="POST" action="{{ path('app_save_profile') }}">
     <input type="hidden" name="_token" value="{{ csrf_token('CSRF') }}">
     

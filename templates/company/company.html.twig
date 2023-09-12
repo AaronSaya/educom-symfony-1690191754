@@ -18,4 +18,40 @@
     <p><img src="{{ user.company.logoUrl }}" alt="Bedrijfslogo"></p>
 
 </div> 
+<div>
+ <h1> Vacature toevoegen</h1>
+
+    <form method="POST" action="{{ path('create_vacancy_form') }}">
+         <input type="hidden" name="_token" value="{{ csrf_token('CSRF') }}">
+
+        <label for="title">Title:</label></br>
+        <input type="text" id="title" name="title" required></br>
+
+        <label for="level">Level:</label></br>
+        <input type="text" id="level" name="level" required></br>
+
+        <label for="location">Location:</label></br>
+        <input type="text" id="location" name="location" required></br>
+
+        <label for="description">Description:</label></br>
+        <textarea id="description" name="description" required></textarea></br>
+
+        <label for="logo_function_url">Logo/Function URL:</label></br>
+        <input type="text" id="logo_function_url" name="logo_function_url" required></br>
+
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+
+    <div>
+    <h1>Vacatures</h1>
+    {% for vacancy in vacancies %}
+
+      <form method="POST" action="{{ path('delete_vacancy', {'id': vacancy.id}) }}">
+            <p><h1>Functie:</h1> <h2>{{ vacancy.title }}</h2></p>
+            <p><img src="{{ vacancy.logoFunctionUrl }}" alt="Vacaturelogo"></p>
+            <button type="submit">Verwijder</button>
+        </form>
+    {% endfor %}
+    </div> 
 {% endblock %}

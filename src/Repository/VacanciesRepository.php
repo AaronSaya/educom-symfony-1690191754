@@ -3,8 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\Vacancies;
+use App\Entity\Company;
+
+use DateTimeInterface;
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @extends ServiceEntityRepository<Vacancies>
@@ -20,6 +25,49 @@ class VacanciesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Vacancies::class);
     }
+
+    public function createVacancy(array $vacancyData, DateTimeInterface $currentDateTime, Company $company): Vacancies
+    {
+        $vacancy = new Vacancies();
+        $vacancy->setDate($currentDateTime);
+        $vacancy->setTitle($vacancyData['title']);
+        $vacancy->setLevel($vacancyData['level']);
+        $vacancy->setLocation($vacancyData['location']);
+        $vacancy->setDescription($vacancyData['description']);
+        $vacancy->setLogoFunctionUrl($vacancyData['logo_function_url']);
+
+        $vacancy->setCompany($company);
+
+        $this->_em->persist($vacancy);
+        $this->_em->flush();
+
+        return $vacancy;
+    }
+
+    public function getVacanciesByCompany(Company $company): array
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.company = :company')
+            ->setParameter('company', $company)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getVacanciesById($id)
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function removeVacancy($vacancy): void
+     {
+         $this->_em->remove($vacancy);
+         $this->_em->flush();
+    }
+}
 
 //    /**
 //     * @return Vacancies[] Returns an array of Vacancies objects
@@ -45,4 +93,3 @@ class VacanciesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}

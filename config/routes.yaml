@@ -1,3 +1,21 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+# Default route for the homepage
+app_homepage:
+    path: /
+    controller: App\Controller\HomeController::index
+
+# Route for displaying company information
+app_company:
+    path: /company
+    controller: App\Controller\CompanyController::index
+
+# Route for creating a vacancy (POST request)
+create_vacancy_form:
+    path: /company/createvacancy
+    controller: App\Controller\CompanyController::createVacancy
+    methods: ['POST']
+
+# Route for deleting a vacancy (POST request with an ID parameter)
+delete_vacancy:
+    path: /company/deletevacancy/{id}
+    controller: App\Controller\CompanyController::deleteVacancy
+    methods: ['POST']
