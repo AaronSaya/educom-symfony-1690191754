@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Repository\ProfileRepository;
 use App\Entity\Profile;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProfileService
 {
@@ -38,5 +39,17 @@ class ProfileService
     public function createProfile($data, $user): ?Profile
     {
         return $this->profileRepository->createProfile($data, $user);
+    }
+    
+    public function saveImageFile($profile, UploadedFile $imageFile): void
+    {
+
+        $this->profileRepository->saveImageFile($profile,$imageFile);
+    }
+
+    public function saveCvFile($profile, UploadedFile $cvFile): void
+    {
+
+        $this->profileRepository->saveCvFile($profile, $cvFile);
     }
 }

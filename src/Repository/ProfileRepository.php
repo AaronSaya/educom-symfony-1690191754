@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 /**
@@ -109,5 +110,38 @@ class ProfileRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
 
         return $profile;
+    }
+
+    public function saveImageFile(Profile $profile, UploadedFile $imageFile): void
+    {
+        // Genereer een unieke bestandsnaam om bestandsconflicten te voorkomen
+        $fileName = md5(uniqid()) . '.' . $imageFile->guessExtension();
+
+        // Verplaats het geüploade bestand naar de gewenste directory
+        $imageFile->move(
+            'C:\xampp\htdocs\educom-vac!t\documents\images', // Vervang 'your_image_directory' door de daadwerkelijke directory waar je de afbeeldingen wilt opslaan
+            $fileName
+        );
+
+        // Sla de bestandsnaam op in het Profile-entity-object
+        $profile->setImage($fileName);
+
+        $this->_em->persist($profile);
+        $this->_em->flush();
+    }
+
+    public function saveCvFile(Profile $profile, UploadedFile $cvFile): void
+    {
+        $fileName = md5(uniqid()) . '.' . $cvFile->guessExtension();
+
+        $cvFile->move(
+            'C:\xampp\htdocs\educom-vac!t\documents\cv',
+            $fileName
+        );
+
+        $profile->setCv($fileName);
+
+        $this->_em->persist($profile);
+        $this->_em->flush();
     }
 }

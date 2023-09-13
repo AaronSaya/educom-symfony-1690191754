@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Service\VacanciesService;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,9 +12,9 @@ class DetailpageController extends AbstractController
     private $vacanciesService;
     private $security;
 
-    public function __construct(VacanciesService $vacanciesService, Security $security)
+    public function __construct(Security $security)
+    
     {
-        $this->vacanciesService = $vacanciesService;
         $this->security = $security;
     }
 
@@ -28,7 +26,8 @@ class DetailpageController extends AbstractController
         if ($vacancy) {
             $this->vacanciesService->removeVacancy($vacancy);
         }
-        return $this->render('detailpage/index.html.twig', [
+
+        return $this->render('detailpage/detailpage.html.twig', [
             'vacancy' => $vacancy,
         ]);
     }

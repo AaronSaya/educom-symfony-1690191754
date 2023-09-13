@@ -30,6 +30,11 @@ class UserService
         return $user;
     }
 
+    public function getAllUsers()
+    {
+        return $this->userRepository->getAllUsers();
+    }
+
     public function isAuthenticated()
     {
         // Controleert of de gebruiker is geauthenticeerd

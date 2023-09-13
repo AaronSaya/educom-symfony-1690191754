@@ -6,15 +6,13 @@ use App\Service\VacanciesService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-
 
 #[Route('/')]
 class HomepageController extends AbstractController
 {
     private $vacanciesService;
+
 
     public function __construct(VacanciesService $vacanciesService)
     {
@@ -35,9 +33,9 @@ class HomepageController extends AbstractController
     #[Route('homepage/detailpage/{id}', name: 'detailpage')]
     public function detailpage($id)
     {
-        $vacancy = $this->vacanciesService->getVacanciesById($id);
+        $vacancy = $this->vacanciesService->getVacanciesById($id); 
 
-        return $this->render('detailpage/index.html.twig', [
+        return $this->render('detailpage/detailpage.html.twig', [
             'controller_name' => 'DetailpageController',
             'vacancy' => $vacancy,
         ]);

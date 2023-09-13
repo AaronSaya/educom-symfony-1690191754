@@ -12,7 +12,16 @@
    <p><h4>Locatie</h4>{{vacancy.location}}</p>
    <p><h4>Omschrijving</h4>{{vacancy.description}}</p> 
   <a href="{{ path('apply_detailpage', {'id': vacancy.id}) }}" class="btn btn-primary">Solliciteer</a>
-
 </div>
-
+<div>
+    <h1>Vacatures</h1>
+ {% for otherVacancy in vacancy.company.vacancies %}
+        <div>
+            <p><img src="{{ otherVacancy.company.logoUrl }}" alt="{{ vacancy.company.name }} Logo"></p>
+            <p><h4>Titel</h4>{{ otherVacancy.title }}</p>
+            <p><h4>Datum</h4>{{ otherVacancy.date | date("m/d/Y") }}</p>
+            <p><a href="{{ path('apply_detailpage', {'id': otherVacancy.id}) }}" class="btn btn-primary">Solliciteer</a></p>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

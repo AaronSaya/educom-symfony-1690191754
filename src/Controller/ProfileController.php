@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProfileController extends AbstractController
 {
@@ -71,10 +71,11 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile/get', name: 'get_profile')]
-    public function getProfile()
+    public function getProfile(): Response
     {
         $user = $this->userService->getUser();
         $profile = $this->profileService->getProfile($user);
+       
 
         if (!$profile) {
 
@@ -85,11 +86,12 @@ class ProfileController extends AbstractController
             'profile' => $profile,
         ]);
     }
+
     #[Route('/profile/delete', name: 'app_delete_profile', methods: ("POST"))]
     public function delete(): Response
     {
-        $user = $this->security->getUser(); 
-        $profile = $this->profileService->getProfile($user); 
+        $user = $this->security->getUser();
+        $profile = $this->profileService->getProfile($user);
 
         if (!$profile) {
 
@@ -99,5 +101,39 @@ class ProfileController extends AbstractController
         $this->profileService->deleteProfile($profile);
 
         return $this->redirectToRoute('app_homepage');
+    }
+
+    #[Route('/profile/upload', name: 'upload_profile', methods: ('POST'))]
+    public function uplaodFiles(Request $request, ProfileService $profileService): Response
+    {
+        $user = $this->userService->getUser();
+        $profile = $this->profileService->getProfile($user);
+        $uploadedFiles = [
+            'imageFile' => $request->files->get('imageFile'),
+            'cvFile' => $request->files->get('cvFile'),
+        ];
+    
+        try {
+            foreach ($uploadedFiles as $key => $file) {
+                if ($file instanceof UploadedFile) {
+                    if ($key === 'imageFile') {
+                        $profileService->saveImageFile($profile, $file);
+                    } elseif ($key === 'cvFile') {
+                        $profileService->saveCvFile($profile, $file);
+                    }
+                }
+            }
+
+    
+            return $this->render('profile/profile.html.twig', [
+                'message' => 'Upload voltooid!',
+                'profile' => $profile,
+            ]);
+        } catch (\Exception $e) {
+            return $this->render('profile/profile.html.twig', [
+                'error' => $e->getMessage(),
+                'profile' => $profile,
+            ]);
+        }
     }
 }

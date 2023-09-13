@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]
 class Profile
@@ -46,6 +48,12 @@ class Profile
 
     #[ORM\Column(length: 255)]
     private ?string $motivation = null;
+
+    #[ORM\Column(type: 'string')]
+    private string $cvFile;
+
+    #[ORM\Column(type: 'string')]
+    private string $imageFile;
 
     public function getId(): ?int
     {
@@ -183,4 +191,29 @@ class Profile
 
         return $this;
     }
-}
+
+    public function getCv(): string
+    {
+        return $this->cvFile;
+    }
+
+    public function setCv(string $cvFile): self
+    {
+        $this->cvFile = $cvFile;
+
+        return $this;
+    }
+
+    public function getImage(): string
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage(string $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+    
+} 

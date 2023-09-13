@@ -43,7 +43,17 @@
     <input type="text" id="fotoUrl" name="fotoUrl" value="{{ profile.fotoUrl }}"><br>
 
     <button type="submit">Opslaan</button>
-  </form>
+  </form></br></br>
+
+  <form action="{{ path('upload_profile') }}" method="POST" enctype="multipart/form-data">
+    <label for="imageFile">Foto uploaden:</label>
+    <input type="file" name="imageFile" id="imageFile" accept="image/*">
+    
+    <label for="cvFile">CV uploaden (PDF):</label>
+    <input type="file" name="cvFile" id="cvFile" accept=".pdf">
+    
+    <input type="submit" value="Uploaden">
+</form>
 
   <a href="{{ path('app_delete_profile') }}">Verwijder Profiel</a>
 {% endblock %}

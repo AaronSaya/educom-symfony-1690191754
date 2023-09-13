@@ -19,3 +19,17 @@ delete_vacancy:
     path: /company/deletevacancy/{id}
     controller: App\Controller\CompanyController::deleteVacancy
     methods: ['POST']
+
+app_detailpage:
+    path: /detailpage/{id}
+    controller: App\Controller\DetailpageController::index
+    methods: [GET]
+    requirements:
+        id: '\d+'
+
+apply_detailpage:
+    path: /detailpage/apply/{id}
+    controller: App\Controller\DetailpageController::applyVacancy
+    methods: [GET]
+    requirements:
+        id: '\d+'
