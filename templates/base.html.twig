@@ -13,8 +13,14 @@
             <li><a href="{{ path('homepage') }}">Home</a></li>
             <li><a href="{{ path('app_register') }}">Register</a></li>
             <li><a href="{{ path('app_login') }}">Login</a></li>
+            {% set userRole = app.user.roles[0] ?? null %}
               {% if app.user %}
-            <li>You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a></li>
+                <li>You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a></li>
+                    {% if userRole == 'ROLE_CANDIDATE' %}
+                        <li><a href="{{ path('app_profile') }}">Profile</a></li>
+                    {% elseif userRole == 'ROLE_EMPLOYER' %}
+                        <li><a href="{{ path('app_company') }}">Company</a></li>
+                    {% endif %}
              {% endif %}
             <!-- Add more navigation links as needed -->
         </ul>

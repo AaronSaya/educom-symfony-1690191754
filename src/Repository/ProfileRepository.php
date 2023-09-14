@@ -114,16 +114,15 @@ class ProfileRepository extends ServiceEntityRepository
 
     public function saveImageFile(Profile $profile, UploadedFile $imageFile): void
     {
-        // Genereer een unieke bestandsnaam om bestandsconflicten te voorkomen
+        $imageUploadPath = $_ENV['IMAGE_UPLOAD_PATH'];
+
         $fileName = md5(uniqid()) . '.' . $imageFile->guessExtension();
 
-        // Verplaats het geüploade bestand naar de gewenste directory
         $imageFile->move(
-            'C:\xampp\htdocs\educom-vac!t\documents\images', // Vervang 'your_image_directory' door de daadwerkelijke directory waar je de afbeeldingen wilt opslaan
-            $fileName
-        );
+        $imageUploadPath,  
+        $fileName
+    );
 
-        // Sla de bestandsnaam op in het Profile-entity-object
         $profile->setImage($fileName);
 
         $this->_em->persist($profile);
@@ -132,12 +131,14 @@ class ProfileRepository extends ServiceEntityRepository
 
     public function saveCvFile(Profile $profile, UploadedFile $cvFile): void
     {
+        $cvUploadPath = $_ENV['CV_UPLOAD_PATH'];
+
         $fileName = md5(uniqid()) . '.' . $cvFile->guessExtension();
 
         $cvFile->move(
-            'C:\xampp\htdocs\educom-vac!t\documents\cv',
-            $fileName
-        );
+        $cvUploadPath,  
+        $fileName
+    );
 
         $profile->setCv($fileName);
 
