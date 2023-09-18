@@ -32,14 +32,15 @@ class DetailpageController extends AbstractController
         ]);
     }
 
-    #[Route('/detailpage/apply/{id}', name: 'apply_detailpage')]
-    public function applyVacancy($id)
-    {
-        if (!$this->security->isGranted('IS_AUTHENTICATED_FULLY')) {
+    // #[Route('/detailpage/apply/{id}', name: 'apply_detailpage')]
+    // public function applyVacancy($id)
+    // {
+    //     if (!$this->security->isGranted('IS_AUTHENTICATED_FULLY')) {
            
-            return $this->redirectToRoute('app_login');
-        }
+    //         return $this->redirectToRoute('app_login');
+    //     }
       
-        return $this->redirectToRoute('app_detailpage', ['id' => $id]);
-    }
+    //     return $this->redirectToRoute('app_activities', ['id' => $id]);
+        
+    // }
 }

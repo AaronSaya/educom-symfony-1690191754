@@ -33,3 +33,8 @@ apply_detailpage:
     methods: [GET]
     requirements:
         id: '\d+'
+
+app_activities:
+    path: '/activities/{id}'
+    controller: App\Controller\ActivitiesController::index
+    methods: [GET]
